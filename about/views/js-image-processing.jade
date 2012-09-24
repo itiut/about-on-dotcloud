@@ -1,0 +1,32 @@
+extends layout
+
+append head
+  link(rel='stylesheet', href='/stylesheets/js-image-processing/style.css')
+  script(src='/javascripts/js-image-processing/filter.js')
+  script(src='/javascripts/js-image-processing/main.js')
+
+block content
+  header
+    h1= title
+
+  #wrapper
+    - for (var i = 0; i < items.length; i++) {
+      div(id=items[i].id).content-box
+        h2= items[i].title
+        .src-wrapper
+          img(src='/images/' + imageDir + items[i].src)
+        .dst-wrapper
+
+        - if (items[i].input) {
+          - var input = items[i].input;
+          .info-wrapper
+            label
+              span.info
+              input(type='range', name=input.name, value=input.value, min=input.min, max=input.max, step=input.step)
+        - }
+    - }
+
+  footer
+    div
+      p &copy; 2012 itiut
+      p photos by alegriphotos.com
